@@ -99,39 +99,7 @@ public class LoginController {
 		    } catch (Exception e) {
 		      logger.debug("Problem authenticating user" + user.getUserName(), e);
 		    }
-		 
 		    return "redirect:/login";
-		/*
-		Session session = sessionFactory.openSession();
-		Transaction tx = null;	
-		try{
-			tx = session.beginTransaction();
-			user.setEnabled(true);
-			String plainPassword = user.getPassword();
-			String encodedPassword = passwordEncoder.encodePassword(user.getPassword(), null);
-			user.setPassword(encodedPassword);
-			Authority auth = new Authority();
-			auth.setUser(user);
-			auth.setAuthority("ROLE_USER");
-			session.save(user);
-			session.save(auth);
-			session.flush();
-			tx.commit();
-			
-			user.setPassword(plainPassword);
-			authenticateUserAndSetSession(user,request);
-			return "redirect:/";
-			
-		}catch(Exception e){
-			if(tx!= null){
-				tx.rollback();
-				throw e;
-			}
-			return "register";
-		} finally{
-			session.close();
-		}
-		*/
 	}
 	
 }
