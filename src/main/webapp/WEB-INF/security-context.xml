@@ -1,0 +1,30 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+            http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+            http://www.springframework.org/schema/security 
+            http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+      
+      <http pattern="/login" security="none"/>
+
+      <http use-expressions="true" authentication-manager-ref="authMgr">
+       <intercept-url pattern="/register" access="isAnonymous()"/>
+        <intercept-url pattern="/**" access="permitAll" />
+            <intercept-url pattern="/**" access="isAuthenticated()"/>
+            <form-login login-page="/login" default-target-url="/" 
+            authentication-failure-url="/login?error=1"/>
+            <logout logout-url="/logout" />
+      </http>
+      
+      <authentication-manager id="authMgr">
+            <authentication-provider >
+               <jdbc-user-service data-source-ref="dataSource" 
+               users-by-username-query="select username, password, enabled from jobfinder.users where username=?"   
+               authorities-by-username-query="select user_username, authority from jobfinder.authorities where user_username=?"
+              /> 
+              <password-encoder ref="passwordEncoder"></password-encoder>
+            </authentication-provider>
+      </authentication-manager>
+      
+</beans:beans>
