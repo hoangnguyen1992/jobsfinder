@@ -18,5 +18,8 @@
     <!-- Enable this to see the SQL statements in the logs-->
     <property name="show_sql">false</property>
 
+	<mapping class="com.jobsfinder.entities.User"/>
+	<mapping class="com.jobsfinder.entities.Authority"/>
+	<mapping class="com.jobsfinder.test.City"/>
   </session-factory>
 </hibernate-configuration>

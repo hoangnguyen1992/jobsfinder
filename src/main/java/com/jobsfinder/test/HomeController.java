@@ -33,71 +33,77 @@ import com.jobsfinder.entities.User;
  */
 @Controller
 public class HomeController {
-	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
+
+	private static final Logger logger = LoggerFactory
+			.getLogger(HomeController.class);
+
 	SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
-		
+
 		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG,
+				DateFormat.LONG, locale);
+
 		String formattedDate = dateFormat.format(date);
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		Authentication authentication = SecurityContextHolder.getContext()
+				.getAuthentication();
 		Session session = sessionFactory.openSession();
-		User user = (User) session.createQuery("from User where userName =:user").setParameter("user", authentication.getName()).uniqueResult();
+		User user = (User) session
+				.createQuery("from User where userName =:user")
+				.setParameter("user", authentication.getName()).uniqueResult();
 		model.addAttribute("user", user);
-		model.addAttribute("serverTime", formattedDate );
-		
+		model.addAttribute("serverTime", formattedDate);
+
 		return "hello";
 	}
-	
-	@RequestMapping(value = "/getData", method=RequestMethod.GET)
-	 @ResponseBody
-	 public List<City> test(){
-	  
-	  Query q = sessionFactory.openSession().createQuery("from City");
-	  
-	  List<City> list = q.list();
-	  
-	  return list;
-	 }
-	
+
+	@RequestMapping(value = "/getData", method = RequestMethod.GET)
+	@ResponseBody
+	public List<City> test() {
+
+		Query q = sessionFactory.openSession().createQuery("from City");
+
+		List<City> list = q.list();
+
+		return list;
+	}
+
 	@RequestMapping(value = "/addNewCity", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
-	 @ResponseBody
-	 public City addNewCity(@RequestBody City city) {
-	  City newCity = null;
-	  
-	  Session session = sessionFactory.openSession();
-	  Transaction tx = null;
-	  
-	  try {
-	   tx = session.beginTransaction();
-	   
-	   newCity = new City();
-	   newCity.setCountry(city.getCountry());
-	   newCity.setName(city.getName());
-	   newCity.setRegionId(city.getRegionId());
-	   session.save(newCity);
-	   session.flush();
-	   tx.commit();
-	   
-	   return newCity;
-	  
-	  } catch (Exception e) {
-	   if (tx != null) {
-	    tx.rollback();
-	   }
-	   e.printStackTrace();
-	   return null;
-	  } finally {
-	   session.close();
-	  }
-	 }
-	
+	@ResponseBody
+	public City addNewCity(@RequestBody City city) {
+		City newCity = null;
+
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+
+		try {
+			tx = session.beginTransaction();
+
+			newCity = new City();
+			newCity.setCountry(city.getCountry());
+			newCity.setName(city.getName());
+			newCity.setRegionId(city.getRegionId());
+			session.save(newCity);
+			session.flush();
+			tx.commit();
+
+			return newCity;
+
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+			return null;
+		} finally {
+			session.close();
+		}
+	}
+
 }
