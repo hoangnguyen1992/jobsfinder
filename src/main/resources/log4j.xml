@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.nabaco.test">
+	<logger name="com.jobsfinder.test">
 		<level value="info" />
 	</logger>
 	

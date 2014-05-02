@@ -1,4 +1,4 @@
-package com.nabaco.entities;
+package com.jobsfinder.entities;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package com.nabaco.test;
+package com.jobsfinder.test;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import HibernateUtils.HibernateUtil;
 
-import com.nabaco.entities.User;
+import com.jobsfinder.entities.User;
 
 /**
  * Handles requests for the application home page.

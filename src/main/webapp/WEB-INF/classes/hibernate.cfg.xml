@@ -18,8 +18,5 @@
     <!-- Enable this to see the SQL statements in the logs-->
     <property name="show_sql">false</property>
 
-    <mapping class="com.nabaco.test.City" />
-    <mapping class="com.nabaco.entities.Authority"/>
-    <mapping class="com.nabaco.entities.User"/>
   </session-factory>
 </hibernate-configuration>

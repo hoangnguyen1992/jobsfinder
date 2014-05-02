@@ -1,4 +1,4 @@
-package com.nabaco.test;
+package com.jobsfinder.test;
 
 import java.security.Principal;
 import java.util.List;
@@ -31,8 +31,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.support.RequestContext;
 
-import com.nabaco.entities.Authority;
-import com.nabaco.entities.User;
+import com.jobsfinder.entities.Authority;
+import com.jobsfinder.entities.User;
 
 import HibernateUtils.HibernateUtil;
 

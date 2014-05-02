@@ -1,4 +1,4 @@
-package com.nabaco.test;
+package com.jobsfinder.test;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
